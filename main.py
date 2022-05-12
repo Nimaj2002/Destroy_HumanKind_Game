@@ -6,12 +6,6 @@ from Earth import Earth
 from settings import Settings
 
 
-# Color Palet https://colorhunt.co/palette/fbf8f1f7ecdee9dac154bab9
-# rgb(251, 248, 241)
-# rgb(247, 236, 222)
-# rgb(233, 218, 193)
-# rgb(84, 186, 185)
-
 class BeAlien:
     """Overall class to manage game assets and behavior."""
 
@@ -29,7 +23,6 @@ class BeAlien:
 
         self.total_level = 2
         self.clock = pygame.time.Clock()
-
 
     def run(self):
         """Start the main loop for the game."""

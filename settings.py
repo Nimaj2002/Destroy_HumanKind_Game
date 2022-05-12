@@ -1,10 +1,12 @@
-import os
-
-import pygame
-
+# Color Palet https://colorhunt.co/palette/fbf8f1f7ecdee9dac154bab9
+# rgb(251, 248, 241)
+# rgb(247, 236, 222)
+# rgb(233, 218, 193)
+# rgb(84, 186, 185)
 
 class Settings:
     """A Class to store all settings for BeAlien"""
+
     def __init__(self):
         """Initialize the game's static settings."""
 
