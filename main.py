@@ -13,6 +13,7 @@ class BeAlien:
         pygame.init()
         self.settings = Settings()
 
+        pygame.display.set_caption("Be Alien :D")
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height)
         )
@@ -21,7 +22,6 @@ class BeAlien:
 
     def run(self):
         """Start the main loop for the game."""
-
         # Limiting FPS
         self.clock.tick(60)
 
@@ -38,7 +38,6 @@ class BeAlien:
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
-        self.screen.blit(self.settings.space, (0, 0))
 
         # Make the most recently drawn screen visible.
         pygame.display.flip()

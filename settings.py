@@ -9,9 +9,5 @@ class Settings:
         """Initialize the game's static settings."""
 
         # Screen Settings
-        self.screen_width, self.screen_height = 1200, 800
-        self.bg_color = (230, 230, 230)
-        self.space = pygame.transform.scale(
-            pygame.image.load(os.path.join("images", "space.jpg")),
-            (self.screen_width, self.screen_height)
-        )
+        self.screen_width, self.screen_height = 600, 700
+        self.bg_color = (251, 248, 241)
