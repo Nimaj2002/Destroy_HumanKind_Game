@@ -11,3 +11,7 @@ class Settings:
         # Screen Settings
         self.screen_width, self.screen_height = 600, 700
         self.bg_color = (251, 248, 241)
+
+        # Earth Settings
+        self.Earth_Width, self.Earth_Height = 200, 200
+        self.rotation_speed = 0.1
