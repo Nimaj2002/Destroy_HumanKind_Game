@@ -20,3 +20,6 @@ class Settings:
 
         # Human Settings
         self.human_Width, self.human_Height = 30, 30
+
+        # Ship Settings
+        self.Ship_Width, self.Ship_Height = 50, 50

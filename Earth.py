@@ -12,7 +12,7 @@ class Earth:
         self.screen_rect = ba_game.screen.get_rect()
         self.setting = ba_game.settings
 
-        # Load the ship image and get its rect.
+        # Load the Earth image and get its rect.
         self.Earth_image = pygame.image.load(os.path.join("images", "Earth.png"))
         self.Earth_image = pygame.transform.scale(self.Earth_image,
                                                   (self.setting.Earth_Width, self.setting.Earth_Height))

@@ -17,7 +17,7 @@ class Human:
         # self.human_image = pygame.transform.rotate(self.human_image, -90)
         self.rect = self.human_image.get_rect()
 
-        # Store a decimal value for the Earth's angel.
+        # Store a decimal value for the Human's angel.
         self.spining_angel = -90
         self.rotation_angel = 0
 
@@ -30,7 +30,7 @@ class Human:
         if self.clockwise_rotating:
             self.spining_angel = float(self.spining_angel + 0.0017) % 360
             # self.rotation_angel = float(self.rotation_angel - 0.001) % 360
-            print(self.spining_angel, "    ", self.rotation_angel)
+            # print(self.spining_angel, "    ", self.rotation_angel)
         elif self.anti_clockwise_rotating:
             self.spining_angel = (self.spining_angel - 0.001) % 360
             # self.rotation_angel = (self.rotation_angel + 0.1) % 360
