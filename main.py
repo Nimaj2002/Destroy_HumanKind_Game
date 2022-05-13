@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from Earth import Earth
+from Human import Human
 from settings import Settings
 
 
@@ -20,18 +21,21 @@ class BeAlien:
         )
 
         self.Earth = Earth(self)
+        self.Human = Human(self)
 
-        self.total_level = 2
+        self.total_level = 1
         self.clock = pygame.time.Clock()
 
     def run(self):
         """Start the main loop for the game."""
         # Limiting FPS
-        self.clock.tick(60)
+        self.clock.tick(30)
 
         while True:
             self._check_events()
             self._Earth_movement()
+            self._Human_movement()
+            self.Human.update()
             self.Earth.update()
             self._update_screen()
 
@@ -48,10 +52,19 @@ class BeAlien:
         elif self.total_level == 2:
             self.Earth.anti_clockwise_rotating = True
 
+    def _Human_movement(self):
+        """This function is for rotating Earth in difrent rotations"""
+        if self.total_level == 1:
+            self.Human.clockwise_rotating = True
+        elif self.total_level == 2:
+            self.Human.anti_clockwise_rotating = True
+
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
+        self.Human.blitme()
         self.Earth.blitme()
+
         # Make the most recently drawn screen visible.
         pygame.display.flip()
 

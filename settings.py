@@ -17,3 +17,6 @@ class Settings:
         # Earth Settings
         self.Earth_Width, self.Earth_Height = 200, 200
         self.rotation_speed = 0.1
+
+        # Human Settings
+        self.human_Width, self.human_Height = 50, 50
