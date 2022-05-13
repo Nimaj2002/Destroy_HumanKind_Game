@@ -18,7 +18,7 @@ class Earth:
                                                   (self.setting.Earth_Width, self.setting.Earth_Height))
         self.rect = self.Earth_image.get_rect()
 
-        # Start Each new Eart at the center
+        # Start Each new Earth at the center
         self.rect.center = self.screen_rect.center
 
         # Store a decimal value for the Earth's angel.
