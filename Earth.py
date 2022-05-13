@@ -46,12 +46,13 @@ class Earth:
 
 class Earth_center:
     """This Class represents earth's Center for bullet collison"""
+
     def __init__(self, ba_game):
         self.screen = ba_game.screen
         self.screen_rect = ba_game.screen.get_rect()
         self.setting = ba_game.settings
 
-        self.rect = pygame.Rect(self.setting.screen_width/2-45, self.setting.screen_height/2-45, 90, 90)
+        self.rect = pygame.Rect(self.setting.screen_width / 2 - 45, self.setting.screen_height / 2 - 45, 90, 90)
 
     def blitme(self):
-        pygame.draw.rect(self.screen, (0,0,0), self.rect)
+        pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
