@@ -19,4 +19,4 @@ class Settings:
         self.rotation_speed = 0.1
 
         # Human Settings
-        self.human_Width, self.human_Height = 50, 50
+        self.human_Width, self.human_Height = 30, 30
