@@ -2,7 +2,7 @@ import sys
 
 import pygame
 
-from Earth import Earth
+from Earth import Earth, Earth_center
 from Human import Human
 from alienShip import AlienShip
 from bullets import Bullet
@@ -23,6 +23,7 @@ class BeAlien:
         )
 
         self.Earth = Earth(self)
+        self.Earth_center = Earth_center(self)
         self.Human = Human(self)
         self.Ship = AlienShip(self)
         self.bullets = pygame.sprite.Group()
@@ -72,7 +73,6 @@ class BeAlien:
             self.Ship.clockwise_rotating = False
         elif event.key == pygame.K_LEFT:
             self.Ship.anti_clockwise_rotating = False
-        print(self.Ship.spining_angel)
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
@@ -86,7 +86,7 @@ class BeAlien:
 
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if self.Earth.rect.colliderect(bullet):
+            if self.Earth_center.rect.colliderect(bullet):
                 self.bullets.remove(bullet)
 
     def _Earth_movement(self):
@@ -106,14 +106,13 @@ class BeAlien:
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
-        self.Human.blitme()
-        self.Earth.blitme()
         self.Ship.blitme()
+        self.Human.blitme()
+
         for bullet in self.bullets.sprites():
             bullet.move()
             bullet.draw_bullet()
-
-
+        self.Earth.blitme()
         # Make the most recently drawn screen visible.
         pygame.display.flip()
 
