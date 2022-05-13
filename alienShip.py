@@ -37,8 +37,8 @@ class AlienShip:
             self.spining_angel -= 0.01
             self.rotation_angel += 0.01
 
-        self.rect.centerx = self.screen_rect.centerx + cos(self.spining_angel) * (self.setting.Earth_Width / 2 + 100)
-        self.rect.centery = self.screen_rect.centery + sin(self.spining_angel) * (self.setting.Earth_Height / 2 + 100)
+        self.rect.centerx = self.screen_rect.centerx + cos(self.spining_angel) * (self.setting.Earth_Width / 2 + 150)
+        self.rect.centery = self.screen_rect.centery + sin(self.spining_angel) * (self.setting.Earth_Height / 2 + 150)
 
 
     def blitme(self):

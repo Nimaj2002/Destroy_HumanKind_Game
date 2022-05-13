@@ -5,6 +5,7 @@ import pygame
 from Earth import Earth
 from Human import Human
 from alienShip import AlienShip
+from bullets import Bullet
 from settings import Settings
 
 
@@ -24,6 +25,7 @@ class BeAlien:
         self.Earth = Earth(self)
         self.Human = Human(self)
         self.Ship = AlienShip(self)
+        self.bullets = pygame.sprite.Group()
 
         self.total_level = 1
         self.clock = pygame.time.Clock()
@@ -40,6 +42,7 @@ class BeAlien:
             self.Human.update()
             self.Earth.update()
             self.Ship.update()
+            self._update_bullets()
             self._update_screen()
 
     def _check_events(self):
@@ -60,8 +63,8 @@ class BeAlien:
             self.Ship.anti_clockwise_rotating = True
         elif event.key == pygame.K_q:
             sys.exit()
-        # elif event.key == pygame.K_SPACE:
-        #     self._fire_bullet()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
@@ -70,6 +73,21 @@ class BeAlien:
         elif event.key == pygame.K_LEFT:
             self.Ship.anti_clockwise_rotating = False
         print(self.Ship.spining_angel)
+
+    def _fire_bullet(self):
+        """Create a new bullet and add it to the bullets group."""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """Update position of bullets and get rid of old bullets."""
+        # Update bullet positions.
+        self.bullets.update()
+
+        # Get rid of bullets that have disappeared.
+        for bullet in self.bullets.copy():
+            if self.Earth.rect.colliderect(bullet):
+                self.bullets.remove(bullet)
 
     def _Earth_movement(self):
         """This function is for rotating Earth in difrent rotations"""
@@ -91,6 +109,10 @@ class BeAlien:
         self.Human.blitme()
         self.Earth.blitme()
         self.Ship.blitme()
+        for bullet in self.bullets.sprites():
+            bullet.move()
+            bullet.draw_bullet()
+
 
         # Make the most recently drawn screen visible.
         pygame.display.flip()
