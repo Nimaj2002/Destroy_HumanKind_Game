@@ -30,6 +30,7 @@ class BeAlien:
 
         self.total_level = 1
         self.clock = pygame.time.Clock()
+        self.score = 0
 
     def run(self):
         """Start the main loop for the game."""
@@ -73,6 +74,7 @@ class BeAlien:
             self.Ship.clockwise_rotating = False
         elif event.key == pygame.K_LEFT:
             self.Ship.anti_clockwise_rotating = False
+        print(self.score)
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
@@ -86,7 +88,10 @@ class BeAlien:
 
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if self.Earth_center.rect.colliderect(bullet):
+            if self.Human.human_center_rect.colliderect(bullet):
+                self.score += 1
+                self.bullets.remove(bullet)
+            elif self.Earth_center.rect.colliderect(bullet):
                 self.bullets.remove(bullet)
 
     def _Earth_movement(self):
@@ -108,7 +113,6 @@ class BeAlien:
         self.screen.fill(self.settings.bg_color)
         self.Ship.blitme()
         self.Human.blitme()
-
         for bullet in self.bullets.sprites():
             bullet.move()
             bullet.draw_bullet()

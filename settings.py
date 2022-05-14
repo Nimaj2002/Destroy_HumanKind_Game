@@ -29,3 +29,6 @@ class Settings:
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (255, 0, 0)
+
+        # Meteor settings
+        self.meteor_color = (92, 89, 80)
