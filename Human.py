@@ -16,7 +16,7 @@ class Human:
                                                   (self.setting.human_Width, self.setting.human_Height))
         # self.human_image = pygame.transform.rotate(self.human_image, -90)
         self.rect = self.human_image.get_rect()
-
+        self.human_center_rect = pygame.Rect(0, 0, 20, 20)
         # Store a decimal value for the Human's angel.
         self.spining_angel = -90
         self.rotation_angel = 0
@@ -42,4 +42,6 @@ class Human:
         # rotation of human around Earth
         new_rect.centerx = self.screen_rect.centerx + cos(self.spining_angel) * (self.setting.Earth_Width / 2)
         new_rect.centery = self.screen_rect.centery + sin(self.spining_angel) * (self.setting.Earth_Height / 2)
+        self.human_center_rect.center = new_rect.center
+        pygame.draw.rect(self.screen, (0, 0, 0), self.human_center_rect)
         self.screen.blit(new_human_image, new_rect)
