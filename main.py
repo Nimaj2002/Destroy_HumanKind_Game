@@ -6,6 +6,8 @@ from Earth import Earth, Earth_center
 from Human import Human
 from alienShip import AlienShip
 from bullets import Bullet
+from game_stats import Gamestats
+from score_board import Scoreboard
 from settings import Settings
 
 
@@ -30,7 +32,9 @@ class BeAlien:
 
         self.total_level = 1
         self.clock = pygame.time.Clock()
-        self.score = 0
+        self.stats = Gamestats()
+        self.sb = Scoreboard(self)
+
 
     def run(self):
         """Start the main loop for the game."""
@@ -39,7 +43,7 @@ class BeAlien:
 
         while True:
             self._check_events()
-            self._Earth_movement()
+            self._level_manager()
             self._Human_movement()
             self.Human.update()
             self.Earth.update()
@@ -74,7 +78,6 @@ class BeAlien:
             self.Ship.clockwise_rotating = False
         elif event.key == pygame.K_LEFT:
             self.Ship.anti_clockwise_rotating = False
-        print(self.score)
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
@@ -89,12 +92,13 @@ class BeAlien:
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
             if self.Human.human_center_rect.colliderect(bullet):
-                self.score += 1
+                self.stats.score += 1
+                self.sb.prep_score()
                 self.bullets.remove(bullet)
             elif self.Earth_center.rect.colliderect(bullet):
                 self.bullets.remove(bullet)
 
-    def _Earth_movement(self):
+    def _level_manager(self):
         """This function is for rotating Earth in difrent rotations"""
         if self.total_level == 1:
             self.Earth.clockwise_rotating = True
@@ -116,6 +120,8 @@ class BeAlien:
         for bullet in self.bullets.sprites():
             bullet.move()
             bullet.draw_bullet()
+        # Draw the score information.
+        self.sb.show_score()
         self.Earth.blitme()
         # Make the most recently drawn screen visible.
         pygame.display.flip()

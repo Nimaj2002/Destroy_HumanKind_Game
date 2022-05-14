@@ -32,3 +32,6 @@ class Settings:
 
         # Meteor settings
         self.meteor_color = (92, 89, 80)
+
+        # Font colors
+        self.blue_font_color = (84, 186, 185)

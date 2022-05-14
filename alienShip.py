@@ -30,11 +30,11 @@ class AlienShip:
 
     def update(self):
         if self.clockwise_rotating:
-            self.spining_angel += 0.01
+            self.spining_angel += 0.0025
             self.rotation_angel -= 0.01
 
         if self.anti_clockwise_rotating:
-            self.spining_angel -= 0.01
+            self.spining_angel -= 0.0025
             self.rotation_angel += 0.01
 
         self.rect.centerx = self.screen_rect.centerx + cos(self.spining_angel) * (self.setting.Earth_Width / 2 + 150)
