@@ -21,8 +21,10 @@ class AlienShip:
         self.rect.centerx = self.screen_rect.centerx + (self.settings.Earth_Width / 2 + 100)
         self.rect.centery = self.screen_rect.centery
 
+        # Storing angle and location of Ship
         self.spining_angel = 0
-        self.rotation_angel = -90
+
+        self.x, self.y = float(self.rect.x), float(self.rect.y)
 
         # Rotating Flag
         self.clockwise_rotating = False
@@ -31,11 +33,9 @@ class AlienShip:
     def update(self):
         if self.clockwise_rotating:
             self.spining_angel += 0.0025
-            self.rotation_angel -= 0.01
 
         if self.anti_clockwise_rotating:
             self.spining_angel -= 0.0025
-            self.rotation_angel += 0.01
 
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
