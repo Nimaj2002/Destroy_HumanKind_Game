@@ -91,7 +91,7 @@ class BeAlien:
 
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if self.Human.human_center_rect.colliderect(bullet):
+            if self.Human.rect.colliderect(bullet):
                 self.stats.score += 1
                 self.sb.prep_score()
                 self.bullets.remove(bullet)

@@ -17,9 +17,6 @@ class Human:
 
         self.rect = self.human_image.get_rect()
 
-        # Creating human center to check collission with bullets
-        self.human_center_rect = pygame.Rect(0, 0, 20, 20)
-
         # Store a decimal value for the Human positions.
         self.spining_angel = -90
 
@@ -57,5 +54,4 @@ class Human:
         new_rect = new_human_image.get_rect()
         new_rect.center = old_center
 
-        pygame.draw.circle(self.screen, (255, 0, 0), , 2)
         self.screen.blit(new_human_image, new_rect)
