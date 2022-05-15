@@ -105,6 +105,9 @@ class BeAlien:
         elif self.total_level == 2:
             self.Earth.anti_clockwise_rotating = True
 
+    def _meteor_management(self):
+        pass
+
     def _Human_movement(self):
         """This function is for rotating Earth in difrent rotations"""
         if self.total_level == 1:
