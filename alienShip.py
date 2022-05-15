@@ -53,7 +53,7 @@ class AlienShip:
         )
         angle_in_degrees = angle_in_radian * round(180/pi, 2)
         new_Ship_image = pygame.transform.rotate(self.Ship_image, 90 - angle_in_degrees)
-        # new_Ship_image = self.Ship_image
+
         new_rect = new_Ship_image.get_rect()
         new_rect.center = old_center
         self.screen.blit(new_Ship_image, new_rect)

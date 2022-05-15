@@ -116,13 +116,13 @@ class BeAlien:
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
         self.Ship.blitme()
-        self.Human.blitme()
         for bullet in self.bullets.sprites():
             bullet.move()
             bullet.draw_bullet()
         # Draw the score information.
         self.sb.show_score()
         self.Earth.blitme()
+        self.Human.blitme()
         # Make the most recently drawn screen visible.
         pygame.display.flip()
 
