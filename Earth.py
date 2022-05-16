@@ -13,7 +13,7 @@ class Earth:
         self.setting = ba_game.settings
 
         # Load the Earth image and get its rect.
-        self.Earth_image = pygame.image.load(os.path.join("images", "Earth.png"))
+        self.Earth_image = pygame.image.load(os.path.join("images", "Earth.png")).convert_alpha()
         self.Earth_image = pygame.transform.scale(self.Earth_image,
                                                   (self.setting.Earth_Width, self.setting.Earth_Height))
         self.rect = self.Earth_image.get_rect()
@@ -39,6 +39,7 @@ class Earth:
         """draw the Eart at the new rotation"""
         old_center = self.rect.center
         new_Earth_image = pygame.transform.rotate(self.Earth_image, self.angel)
+
         new_rect = new_Earth_image.get_rect()
         new_rect.center = old_center
         self.screen.blit(new_Earth_image, new_rect)

@@ -11,7 +11,7 @@ class Human:
         self.settings = ba_game.settings
 
         # Load human image and get its rect
-        self.human_image = pygame.image.load(os.path.join("images", "human.png"))
+        self.human_image = pygame.image.load(os.path.join("images", "human.png")).convert_alpha()
         self.human_image = pygame.transform.scale(self.human_image,
                                                   (self.settings.human_Width, self.settings.human_Height))
 
@@ -32,7 +32,7 @@ class Human:
             self.spining_angel = float(self.spining_angel + 0.0017) % 360
 
         elif self.anti_clockwise_rotating:
-            self.spining_angel = (self.spining_angel - 0.001) % 360
+            self.spining_angel = (self.spining_angel - 0.0017) % 360
 
         self.x, self.y = float(self.rect.x), float(self.rect.y)
 
