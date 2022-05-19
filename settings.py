@@ -19,7 +19,7 @@ class Settings:
         self.rotation_speed = 0.1
 
         # Human Settings
-        self.human_Width, self.human_Height = 30, 30
+        self.human_Width, self.human_Height = 30, 50
 
         # Ship Settings
         self.Ship_Width, self.Ship_Height = 50, 50

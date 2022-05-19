@@ -35,7 +35,6 @@ class BeAlien:
         self.stats = Gamestats()
         self.sb = Scoreboard(self)
 
-
     def run(self):
         """Start the main loop for the game."""
         # Limiting FPS
@@ -91,11 +90,13 @@ class BeAlien:
 
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if self.Human.human_center_rect.colliderect(bullet):
+            if self.Human.rect.colliderect(bullet):
                 self.stats.score += 1
                 self.sb.prep_score()
                 self.bullets.remove(bullet)
             elif self.Earth_center.rect.colliderect(bullet):
+                self.stats.missed += 1
+                self.sb.prep_score()
                 self.bullets.remove(bullet)
 
     def _level_manager(self):
@@ -119,13 +120,13 @@ class BeAlien:
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
         self.Ship.blitme()
-        self.Human.blitme()
         for bullet in self.bullets.sprites():
             bullet.move()
             bullet.draw_bullet()
         # Draw the score information.
         self.sb.show_score()
         self.Earth.blitme()
+        self.Human.blitme()
         # Make the most recently drawn screen visible.
         pygame.display.flip()
 
