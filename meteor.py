@@ -8,6 +8,7 @@ from pygame.sprite import Sprite
 
 class Meteor(Sprite):
     """A class to represent a single meteor in the fleet."""
+
     def __init__(self, ba_game):
         """Initialize the alien and set its starting position."""
         super().__init__()
@@ -20,7 +21,7 @@ class Meteor(Sprite):
         # using image name instead of meteor_image because of sprite
         self.image = pygame.image.load(os.path.join("./Assets/images", "meteor.png")).convert_alpha()
         self.image = pygame.transform.scale(self.image,
-                                                 (self.settings.Meteor_Width, self.settings.Meteor_Height))
+                                            (self.settings.Meteor_Width, self.settings.Meteor_Height))
         self.rect = self.image.get_rect()
 
         # Start Each meteor at TOP or DOWN , RIGHT or LEFT
@@ -36,23 +37,23 @@ class Meteor(Sprite):
             self.rect.centerx = random.randint(0, self.settings.screen_width)
             self.rect.centery = -self.settings.Meteor_Height
             # rotating meteor in the movement angel
-            self.image = pygame.transform.rotate(self.image, -(90+self.movement_angel_in_degrees))
+            self.image = pygame.transform.rotate(self.image, -(90 + self.movement_angel_in_degrees))
 
         if self.startfrom == "DOWN":
             self.rect.centerx = random.randint(0, self.settings.screen_width)
             self.rect.centery = self.settings.screen_height + self.settings.Meteor_Height
             # rotating meteor in the movement angel
             if self.movement_angel_in_degrees < 90:
-                self.image = pygame.transform.rotate(self.image, -(90-self.movement_angel_in_degrees))
+                self.image = pygame.transform.rotate(self.image, -(90 - self.movement_angel_in_degrees))
 
             elif self.movement_angel_in_degrees >= 90:
-                self.image = pygame.transform.rotate(self.image, self.movement_angel_in_degrees-90)
+                self.image = pygame.transform.rotate(self.image, self.movement_angel_in_degrees - 90)
 
         if self.startfrom == "RIGHT":
             self.rect.centerx = self.settings.screen_width + self.settings.Meteor_Width
             self.rect.centery = random.randint(0, self.settings.screen_height)
             # rotating meteor in the movement angel
-            self.image = pygame.transform.rotate(self.image, 180-self.movement_angel_in_degrees)
+            self.image = pygame.transform.rotate(self.image, 180 - self.movement_angel_in_degrees)
 
         if self.startfrom == "LEFT":
             self.rect.centerx = -self.settings.Meteor_Width

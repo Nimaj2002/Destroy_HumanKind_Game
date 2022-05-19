@@ -32,10 +32,10 @@ class AlienShip:
 
     def update(self):
         if self.clockwise_rotating:
-            self.spining_angel += round(1/360, 4)
+            self.spining_angel += round(1 / 360, 4)
 
         if self.anti_clockwise_rotating:
-            self.spining_angel -= round(1/360, 4)
+            self.spining_angel -= round(1 / 360, 4)
 
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
@@ -50,7 +50,7 @@ class AlienShip:
             atan2((self.settings.screen_height / 2) - self.y, (self.settings.screen_width / 2) - self.x),
             2
         )
-        angle_in_degrees = angle_in_radian * round(180/pi, 2)
+        angle_in_degrees = angle_in_radian * round(180 / pi, 2)
         new_Ship_image = pygame.transform.rotate(self.Ship_image, 90 - angle_in_degrees)
 
         new_rect = new_Ship_image.get_rect()

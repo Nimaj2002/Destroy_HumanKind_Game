@@ -7,9 +7,9 @@ from Human import Human
 from alienShip import AlienShip
 from bullets import Bullet
 from game_stats import Gamestats
+from meteor import Meteor
 from score_board import Scoreboard
 from settings import Settings
-from meteor import Meteor
 
 
 class BeAlien:
