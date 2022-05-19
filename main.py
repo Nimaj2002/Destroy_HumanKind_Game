@@ -35,7 +35,6 @@ class BeAlien:
         self.stats = Gamestats()
         self.sb = Scoreboard(self)
 
-
     def run(self):
         """Start the main loop for the game."""
         # Limiting FPS
@@ -96,6 +95,8 @@ class BeAlien:
                 self.sb.prep_score()
                 self.bullets.remove(bullet)
             elif self.Earth_center.rect.colliderect(bullet):
+                self.stats.missed += 1
+                self.sb.prep_score()
                 self.bullets.remove(bullet)
 
     def _level_manager(self):
