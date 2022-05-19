@@ -11,7 +11,7 @@ class Human:
         self.settings = ba_game.settings
 
         # Load human image and get its rect
-        self.human_image = pygame.image.load(os.path.join("images", "human.png")).convert_alpha()
+        self.human_image = pygame.image.load(os.path.join("./Assets/images", "human.png")).convert_alpha()
         self.human_image = pygame.transform.scale(self.human_image,
                                                   (self.settings.human_Width, self.settings.human_Height))
 

@@ -12,7 +12,7 @@ class AlienShip:
         self.settings = ba_game.settings
 
         # Load the Ship image and get its rect.
-        self.Ship_image = pygame.image.load(os.path.join("images", "ufo.png")).convert_alpha()
+        self.Ship_image = pygame.image.load(os.path.join("./Assets/images", "ufo.png")).convert_alpha()
         self.Ship_image = pygame.transform.scale(self.Ship_image,
                                                  (self.settings.Ship_Width, self.settings.Ship_Height))
         self.rect = self.Ship_image.get_rect()

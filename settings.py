@@ -31,7 +31,8 @@ class Settings:
         self.bullet_color = (255, 0, 0)
 
         # Meteor settings
-        self.meteor_color = (92, 89, 80)
+        self.Meteor_Width, self.Meteor_Height = 50, 50
+        self.Meteor_Speed = 0.1
 
         # Font colors
         self.blue_font_color = (84, 186, 185)

@@ -13,7 +13,7 @@ class Earth:
         self.setting = ba_game.settings
 
         # Load the Earth image and get its rect.
-        self.Earth_image = pygame.image.load(os.path.join("images", "Earth.png")).convert_alpha()
+        self.Earth_image = pygame.image.load(os.path.join("./Assets/images", "Earth.png")).convert_alpha()
         self.Earth_image = pygame.transform.scale(self.Earth_image,
                                                   (self.setting.Earth_Width, self.setting.Earth_Height))
         self.rect = self.Earth_image.get_rect()

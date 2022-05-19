@@ -9,6 +9,7 @@ from bullets import Bullet
 from game_stats import Gamestats
 from score_board import Scoreboard
 from settings import Settings
+from meteor import Meteor
 
 
 class BeAlien:
@@ -29,11 +30,14 @@ class BeAlien:
         self.Human = Human(self)
         self.Ship = AlienShip(self)
         self.bullets = pygame.sprite.Group()
+        self.meteors = pygame.sprite.Group()
 
         self.total_level = 1
         self.clock = pygame.time.Clock()
         self.stats = Gamestats()
         self.sb = Scoreboard(self)
+
+        self._create_meteors()
 
     def run(self):
         """Start the main loop for the game."""
@@ -48,6 +52,7 @@ class BeAlien:
             self.Earth.update()
             self.Ship.update()
             self._update_bullets()
+            self._update_meteors()
             self._update_screen()
 
     def _check_events(self):
@@ -106,15 +111,20 @@ class BeAlien:
         elif self.total_level == 2:
             self.Earth.anti_clockwise_rotating = True
 
-    def _meteor_management(self):
-        pass
-
     def _Human_movement(self):
         """This function is for rotating Earth in difrent rotations"""
         if self.total_level == 1:
             self.Human.clockwise_rotating = True
         elif self.total_level == 2:
             self.Human.anti_clockwise_rotating = True
+
+    def _create_meteors(self):
+        for _ in range(10):
+            meteor = Meteor(self)
+            self.meteors.add(meteor)
+
+    def _update_meteors(self):
+        self.meteors.update()
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
@@ -127,6 +137,7 @@ class BeAlien:
         self.sb.show_score()
         self.Earth.blitme()
         self.Human.blitme()
+        self.meteors.draw(self.screen)
         # Make the most recently drawn screen visible.
         pygame.display.flip()
 
