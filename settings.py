@@ -16,11 +16,11 @@ class Settings:
 
         # Earth Settings
         self.Earth_Width, self.Earth_Height = 200, 200
-        self.rotation_speed = 0.1
+        self.earth_rotation_speed = 2
 
         # Human Settings
         self.human_Width, self.human_Height = 30, 50
-
+        self.human_rotation_speed = 0.05
         # Ship Settings
         self.Ship_Width, self.Ship_Height = 50, 50
 

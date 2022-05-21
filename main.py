@@ -2,7 +2,7 @@ import sys
 
 import pygame
 
-from Earth import Earth, Earth_center
+from Earth import Earth, EarthCenter
 from Human import Human
 from alienShip import AlienShip
 from bullets import Bullet
@@ -26,7 +26,7 @@ class BeAlien:
         )
 
         self.Earth = Earth(self)
-        self.Earth_center = Earth_center(self)
+        self.Earth_center = EarthCenter(self)
         self.Human = Human(self)
         self.Ship = AlienShip(self)
         self.bullets = pygame.sprite.Group()
