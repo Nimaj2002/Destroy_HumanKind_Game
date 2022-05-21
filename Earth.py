@@ -11,12 +11,12 @@ class Earth:
         """Initilize the Earth and set its starting position"""
         self.screen = ba_game.screen
         self.screen_rect = ba_game.screen.get_rect()
-        self.setting = ba_game.settings
+        self.settings = ba_game.settings
 
         # Load the Earth image and get its rect.
         self.Earth_image = pygame.image.load(os.path.join("images", "Earth.png")).convert_alpha()
         self.Earth_image = pygame.transform.scale(self.Earth_image,
-                                                  (self.setting.Earth_Width, self.setting.Earth_Height))
+                                                  (self.settings.Earth_Width, self.settings.Earth_Height))
         self.rect = self.Earth_image.get_rect()
 
         # Start Each new Earth at the center
@@ -32,9 +32,9 @@ class Earth:
     def update(self):
         """Updating rotation of Earth"""
         if self.clockwise_rotating:
-            self.angel_in_degrees -= self.setting.rotation_speed
+            self.angel_in_degrees -= self.settings.earth_rotation_speed
         elif self.anti_clockwise_rotating:
-            self.angel_in_degrees += self.setting.rotation_speed
+            self.angel_in_degrees += self.settings.earth_rotation_speed
 
     def blitme(self):
         """draw the Eart at the new rotation"""

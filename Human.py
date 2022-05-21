@@ -18,7 +18,7 @@ class Human:
         self.rect = self.human_image.get_rect()
 
         # Store a decimal value for the Human positions.
-        self.spining_angel = -90
+        self.spining_angel_in_degrees = -90
 
         self.x, self.y = float(self.rect.x), float(self.rect.y)
 
@@ -29,16 +29,17 @@ class Human:
     def update(self):
         """Updating rotation of human"""
         if self.clockwise_rotating:
-            self.spining_angel = float(self.spining_angel + 0.0017) % 360
+            self.spining_angel_in_degrees += self.settings.human_rotation_speed
 
         elif self.anti_clockwise_rotating:
-            self.spining_angel = (self.spining_angel - 0.0017) % 360
+            self.spining_angel_in_degrees -= self.settings.human_rotation_speed
 
         self.x, self.y = float(self.rect.x), float(self.rect.y)
 
         # rotation of human around Earth
-        self.rect.centerx = self.screen_rect.centerx + cos(self.spining_angel) * (self.settings.Earth_Width / 2)
-        self.rect.centery = self.screen_rect.centery + sin(self.spining_angel) * (self.settings.Earth_Height / 2)
+        spining_angel_in_radians = (self.spining_angel_in_degrees * pi) / 180
+        self.rect.centerx = self.screen_rect.centerx + cos(spining_angel_in_radians) * (self.settings.Earth_Width / 2)
+        self.rect.centery = self.screen_rect.centery + sin(spining_angel_in_radians) * (self.settings.Earth_Height / 2)
 
     def blitme(self):
         old_center = self.rect.center
