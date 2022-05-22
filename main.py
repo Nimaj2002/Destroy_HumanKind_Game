@@ -33,11 +33,11 @@ class BeAlien:
         self.meteors = pygame.sprite.Group()
 
         self.total_level = 1
+        self.starting_meteor = 10
+
         self.clock = pygame.time.Clock()
         self.stats = Gamestats()
         self.sb = Scoreboard(self)
-
-        self._create_meteors()
 
     def run(self):
         """Start the main loop for the game."""
@@ -118,10 +118,9 @@ class BeAlien:
         elif self.total_level == 2:
             self.Human.anti_clockwise_rotating = True
 
-    def _create_meteors(self):
-        for _ in range(10):
-            meteor = Meteor(self)
-            self.meteors.add(meteor)
+    def _create_a_meteor(self):
+        meteor = Meteor(self)
+        self.meteors.add(meteor)
 
     def _update_meteors(self):
         self.meteors.update()
