@@ -15,6 +15,7 @@ class AlienShip:
         self.Ship_image = pygame.image.load(os.path.join("./Assets/images", "ufo.png")).convert_alpha()
         self.Ship_image = pygame.transform.scale(self.Ship_image,
                                                  (self.settings.Ship_Width, self.settings.Ship_Height))
+        self.Ship_mask = pygame.mask.from_surface(self.Ship_image)
         self.rect = self.Ship_image.get_rect()
 
         # Start Each new Ship at the top format
@@ -56,3 +57,8 @@ class AlienShip:
         new_rect = new_Ship_image.get_rect()
         new_rect.center = old_center
         self.screen.blit(new_Ship_image, new_rect)
+
+    def reset_alien(self):
+        self.rect.centerx = self.screen_rect.centerx + (self.settings.Earth_Width / 2 + 100)
+        self.rect.centery = self.screen_rect.centery
+        self.spining_angel = 0

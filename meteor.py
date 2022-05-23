@@ -22,6 +22,7 @@ class Meteor(Sprite):
         self.image = pygame.image.load(os.path.join("./Assets/images", "meteor.png")).convert_alpha()
         self.image = pygame.transform.scale(self.image,
                                             (self.settings.Meteor_Width, self.settings.Meteor_Height))
+        self.image_mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
 
         # Start Each meteor at TOP or DOWN , RIGHT or LEFT

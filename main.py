@@ -1,9 +1,11 @@
 import sys
+from time import sleep
 
 import pygame
 
 from Earth import Earth, EarthCenter
 from Human import Human
+from StartPage import StartScreen
 from alienShip import AlienShip
 from bullets import Bullet
 from game_stats import Gamestats
@@ -28,7 +30,7 @@ class BeAlien:
         self.Earth = Earth(self)
         self.Earth_center = EarthCenter(self)
         self.Human = Human(self)
-        self.Ship = AlienShip(self)
+        self.AlienShip = AlienShip(self)
         self.bullets = pygame.sprite.Group()
         self.meteors = pygame.sprite.Group()
 
@@ -36,10 +38,11 @@ class BeAlien:
         self.starting_meteor = 10
 
         self.clock = pygame.time.Clock()
-        self.stats = Gamestats()
+        self.stats = Gamestats(self)
         self.sb = Scoreboard(self)
+        self.startpage = StartScreen(self)
 
-        for _ in range(10):
+        for _ in range(5):
             self._create_a_meteor()
 
     def run(self):
@@ -50,12 +53,13 @@ class BeAlien:
         while True:
             self._check_events()
             self._level_manager()
-            self._Human_movement()
-            self.Human.update()
-            self.Earth.update()
-            self.Ship.update()
-            self._update_bullets()
-            self._update_meteors()
+            if self.stats.game_active:
+                self._Human_movement()
+                self.Human.update()
+                self.Earth.update()
+                self.AlienShip.update()
+                self._update_bullets()
+                self._update_meteors()
             self._update_screen()
 
     def _check_events(self):
@@ -67,13 +71,36 @@ class BeAlien:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_point = pygame.mouse.get_pos()
+                self._check_play_btn(mouse_point)
+
+    def _check_play_btn(self, mouse_pos):
+        """Start a new game when the player clicks Play."""
+        button_clicked = self.startpage.play_btn.collidepoint(mouse_pos)
+        if button_clicked and not self.stats.game_active:
+            # print("TE")
+            # Reset the game settings.
+            self.stats.game_active = True
+
+            # Get rid of any remaining aliens and bullets.
+            self.meteors.empty()
+            self.bullets.empty()
+
+            # Create a new fleet and center the ship.
+            for _ in range(5):
+                self._create_a_meteor()
+            self.AlienShip.reset_alien()
+
+            # Hide the mouse cursor.
+            pygame.mouse.set_visible(False)
 
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
         if event.key == pygame.K_RIGHT:
-            self.Ship.clockwise_rotating = True
+            self.AlienShip.clockwise_rotating = True
         elif event.key == pygame.K_LEFT:
-            self.Ship.anti_clockwise_rotating = True
+            self.AlienShip.anti_clockwise_rotating = True
         elif event.key == pygame.K_q:
             sys.exit()
         elif event.key == pygame.K_SPACE:
@@ -82,9 +109,9 @@ class BeAlien:
     def _check_keyup_events(self, event):
         """Respond to key releases."""
         if event.key == pygame.K_RIGHT:
-            self.Ship.clockwise_rotating = False
+            self.AlienShip.clockwise_rotating = False
         elif event.key == pygame.K_LEFT:
-            self.Ship.anti_clockwise_rotating = False
+            self.AlienShip.anti_clockwise_rotating = False
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
@@ -124,7 +151,8 @@ class BeAlien:
     def _check_meteor_collission(self):
         """check collision of each meteor with Ship & walls & Earth and creat another meteor if"""
         for meteor in self.meteors:
-            if self.Ship.rect.colliderect(meteor):
+            offset = (int(self.AlienShip.x - meteor.rect.x), int(self.AlienShip.y - meteor.rect.y))
+            if self.AlienShip.Ship_mask.overlap(meteor.image_mask, offset):
                 self._ship_hit()
 
             elif self.Earth_center.rect.colliderect(meteor):
@@ -138,13 +166,13 @@ class BeAlien:
                 self.meteors.remove(meteor)
                 self._create_a_meteor()
 
+
     def _ship_hit(self):
         """Respond to the ship being hit by a meteor and showing start screen"""
-        self.show_start_screen()
-
-    def show_start_screen(self):
-        """Shows Start Screen"""
-        pass
+        """Respond to the ship being hit by an alien."""
+        sleep(1)
+        self.stats.game_active = False
+        pygame.mouse.set_visible(True)
 
     def _create_a_meteor(self):
         """ creates only one meteor """
@@ -158,8 +186,8 @@ class BeAlien:
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
-        self.screen.fill(self.settings.bg_color)
-        self.Ship.blitme()
+        self.screen.fill(self.settings.light_Beige_color)
+        self.AlienShip.blitme()
 
         # Drawing Bullets
         for bullet in self.bullets.sprites():
@@ -173,6 +201,10 @@ class BeAlien:
         self.meteors.draw(self.screen)
         self.Earth.blitme()
         self.Human.blitme()
+
+        # Draw the StartScreen if the game is inactive.
+        if not self.stats.game_active:
+            self.startpage.blitme()
 
         # Make the most recently drawn screen visible.
         pygame.display.flip()

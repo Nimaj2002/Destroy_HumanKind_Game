@@ -12,7 +12,6 @@ class Settings:
 
         # Screen Settings
         self.screen_width, self.screen_height = 600, 700
-        self.bg_color = (251, 248, 241)
 
         # Earth Settings
         self.Earth_Width, self.Earth_Height = 200, 200
@@ -35,5 +34,7 @@ class Settings:
         self.Meteor_Width, self.Meteor_Height = 50, 50
         self.Meteor_Speed = 0.1
 
-        # Font colors
-        self.blue_font_color = (84, 186, 185)
+        # colors
+        self.light_Beige_color = (251, 248, 241)
+        self.dark_Beige_color = (233, 218, 193)
+        self.blue_color = (84, 186, 185)

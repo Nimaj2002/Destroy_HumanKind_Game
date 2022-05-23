@@ -2,7 +2,7 @@ import os.path
 from math import pi
 
 import pygame.image
-
+# 556 599
 
 class Earth:
     """A class to manage Earth and its Ball"""

@@ -14,7 +14,6 @@ class Human:
         self.human_image = pygame.image.load(os.path.join("./Assets/images", "human.png")).convert_alpha()
         self.human_image = pygame.transform.scale(self.human_image,
                                                   (self.settings.human_Width, self.settings.human_Height))
-
         self.rect = self.human_image.get_rect()
 
         # Store a decimal value for the Human positions.
