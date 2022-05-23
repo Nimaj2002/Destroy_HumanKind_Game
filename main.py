@@ -79,9 +79,10 @@ class BeAlien:
         """Start a new game when the player clicks Play."""
         button_clicked = self.startpage.play_btn.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
-            # print("TE")
             # Reset the game settings.
             self.stats.game_active = True
+            self.sb.prep_score()
+
 
             # Get rid of any remaining aliens and bullets.
             self.meteors.empty()
@@ -174,6 +175,8 @@ class BeAlien:
     def _ship_hit(self):
         """Respond to the ship being hit by a meteor and showing start screen"""
         """Respond to the ship being hit by an alien."""
+        self.stats.save_high_score()
+        self.stats.reset_stats()
         sleep(1)
         self.stats.game_active = False
         pygame.mouse.set_visible(True)

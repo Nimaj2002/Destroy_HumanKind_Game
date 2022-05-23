@@ -15,6 +15,7 @@ class Scoreboard:
         self.missed_image = None
         self.score_rect = None
         self.score_image = None
+        self.high_image = None
 
         # Font settings for scoring information.
         self.text_color = (30, 30, 30)
@@ -39,8 +40,16 @@ class Scoreboard:
         self.missed_rect.right = self.screen_rect.right - 20
         self.missed_rect.top = 60
 
+        high_score = f"high Score {str(self.stats.high_score)}"
+        self.high_image = self.font.render(high_score, True, self.settings.blue_color, self.settings.light_Beige_color)
+        # Display the score at the top left of the score string.
+        self.high_rect = self.high_image.get_rect()
+        self.high_rect.left = self.screen_rect.left + 20
+        self.high_rect.top = 20
+
 
     def show_score(self):
         """Draw score to the screen."""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.missed_image, self.missed_rect)
+        self.screen.blit(self.high_image, self.high_rect)
