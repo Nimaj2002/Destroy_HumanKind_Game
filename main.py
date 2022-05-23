@@ -129,10 +129,15 @@ class BeAlien:
                 self.stats.score += 1
                 self.sb.prep_score()
                 self.bullets.remove(bullet)
+
             elif self.Earth_center.rect.colliderect(bullet):
                 self.stats.missed += 1
                 self.sb.prep_score()
                 self.bullets.remove(bullet)
+
+        if pygame.sprite.groupcollide(self.bullets, self.meteors, True, True):
+            self._create_a_meteor()
+
 
     def _level_manager(self):
         """This function is for rotating Earth in difrent rotations"""
@@ -165,7 +170,6 @@ class BeAlien:
                     meteor.rect.y >= self.settings.screen_height + 100:
                 self.meteors.remove(meteor)
                 self._create_a_meteor()
-
 
     def _ship_hit(self):
         """Respond to the ship being hit by a meteor and showing start screen"""
