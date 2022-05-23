@@ -83,7 +83,6 @@ class BeAlien:
             self.stats.game_active = True
             self.sb.prep_score()
 
-
             # Get rid of any remaining aliens and bullets.
             self.meteors.empty()
             self.bullets.empty()
@@ -139,7 +138,6 @@ class BeAlien:
         if pygame.sprite.groupcollide(self.bullets, self.meteors, True, True):
             self._create_a_meteor()
 
-
     def _level_manager(self):
         """This function is for rotating Earth in difrent rotations"""
         if self.total_level == 1:
@@ -174,7 +172,6 @@ class BeAlien:
 
     def _ship_hit(self):
         """Respond to the ship being hit by a meteor and showing start screen"""
-        """Respond to the ship being hit by an alien."""
         self.stats.save_high_score()
         self.stats.reset_stats()
         sleep(1)

@@ -28,9 +28,9 @@ class Bullet(Sprite):
         """Move the bullet toward the Earth."""
         # Update the decimal position of the bullet.
         # get angle to center in rafians
-        angle = atan2((self.settings.screen_height/2)-self.y, (self.settings.screen_width/2)-self.x)
-        self.dx = cos(angle)*0.5
-        self.dy = sin(angle)*0.5
+        angle = atan2((self.settings.screen_height / 2) - self.y, (self.settings.screen_width / 2) - self.x)
+        self.dx = cos(angle) * 0.5
+        self.dy = sin(angle) * 0.5
         # Update the rect position.
         # self.rect.y = self.y + self.dy
         self.rect.x -= self.dx

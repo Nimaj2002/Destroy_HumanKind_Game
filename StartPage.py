@@ -32,7 +32,6 @@ class StartScreen:
         self.write_text("Play!", "big", self.settings.blue_color,
                         (self.settings.screen_width // 2 - 40, self.settings.screen_height - 100))
 
-
     def write_text(self, text, font_weight, color, location=(0, 0)):
         draw_text = ""
         if font_weight.lower() == "big":

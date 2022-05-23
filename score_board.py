@@ -3,6 +3,7 @@ import pygame.font
 
 class Scoreboard:
     """A class to report scoring information."""
+
     def __init__(self, ba_game):
         """Initialize scorekeeping attributes."""
         self.screen = ba_game.screen
@@ -34,7 +35,8 @@ class Scoreboard:
         self.score_rect.top = 20
 
         missed_str = f"Missed {str(self.stats.missed)}"
-        self.missed_image = self.font.render(missed_str, True, self.settings.blue_color, self.settings.light_Beige_color)
+        self.missed_image = self.font.render(missed_str, True, self.settings.blue_color,
+                                             self.settings.light_Beige_color)
         # Display the score at the bottom of the score string.
         self.missed_rect = self.missed_image.get_rect()
         self.missed_rect.right = self.screen_rect.right - 20
@@ -46,7 +48,6 @@ class Scoreboard:
         self.high_rect = self.high_image.get_rect()
         self.high_rect.left = self.screen_rect.left + 20
         self.high_rect.top = 20
-
 
     def show_score(self):
         """Draw score to the screen."""
