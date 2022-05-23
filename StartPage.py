@@ -8,6 +8,7 @@ class StartScreen:
         self.screen = ba_game.screen
         self.screen_rect = ba_game.screen.get_rect()
         self.settings = ba_game.settings
+        self.stats = ba_game.stats
 
         # Fonts
         pygame.font.init()
@@ -27,6 +28,10 @@ class StartScreen:
 
         self.write_text("Movements:", "small", self.settings.blue_color, (self.settings.screen_width // 2 - 200, 200))
         self.screen.blit(self.keyboard_image, (self.settings.screen_width // 2 + 10, 150))
+
+        self.write_text("High Score:", "small", self.settings.blue_color, (self.settings.screen_width // 2 - 200, 400))
+        self.write_text(f"{self.stats.high_score}", "small", self.settings.blue_color,
+                        (self.settings.screen_width // 2 + 100, 400))
 
         pygame.draw.rect(self.screen, self.settings.dark_Beige_color, self.play_btn)
         self.write_text("Play!", "big", self.settings.blue_color,
