@@ -29,7 +29,7 @@ class Meteor(Sprite):
         self.startfrom = random.choice(self.starting_locations)
 
         # movement angel
-        self.movement_angel_in_degrees = random.randint(0, 180)
+        self.movement_angel_in_degrees = random.randint(20, 160)
         self.movement_angel_in_radians = (self.movement_angel_in_degrees * pi / 180)
 
         # Locating the meteor and rotating it

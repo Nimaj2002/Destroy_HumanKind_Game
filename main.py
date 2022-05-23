@@ -39,6 +39,9 @@ class BeAlien:
         self.stats = Gamestats()
         self.sb = Scoreboard(self)
 
+        for _ in range(10):
+            self._create_a_meteor()
+
     def run(self):
         """Start the main loop for the game."""
         # Limiting FPS
@@ -118,11 +121,39 @@ class BeAlien:
         elif self.total_level == 2:
             self.Human.anti_clockwise_rotating = True
 
+    def _check_meteor_collission(self):
+        """check collision of each meteor with Ship & walls & Earth and creat another meteor if"""
+        for meteor in self.meteors:
+            if self.Ship.rect.colliderect(meteor):
+                self._ship_hit()
+
+            elif self.Earth_center.rect.colliderect(meteor):
+                self.meteors.remove(meteor)
+                self._create_a_meteor()
+
+            elif meteor.rect.x <= -100 or \
+                    meteor.rect.x >= self.settings.screen_width + 100 or \
+                    meteor.rect.y <= -100 or \
+                    meteor.rect.y >= self.settings.screen_height + 100:
+                self.meteors.remove(meteor)
+                self._create_a_meteor()
+
+    def _ship_hit(self):
+        """Respond to the ship being hit by a meteor and showing start screen"""
+        self.show_start_screen()
+
+    def show_start_screen(self):
+        """Shows Start Screen"""
+        pass
+
     def _create_a_meteor(self):
+        """ creates only one meteor """
         meteor = Meteor(self)
         self.meteors.add(meteor)
 
     def _update_meteors(self):
+        """updates meteors locations"""
+        self._check_meteor_collission()
         self.meteors.update()
 
     def _update_screen(self):
@@ -134,9 +165,10 @@ class BeAlien:
             bullet.draw_bullet()
         # Draw the score information.
         self.sb.show_score()
-        self.Earth.blitme()
-        self.Human.blitme()
         self.meteors.draw(self.screen)
+        self.Earth.blitme()
+        self.Earth_center.blitme()
+        self.Human.blitme()
         # Make the most recently drawn screen visible.
         pygame.display.flip()
 

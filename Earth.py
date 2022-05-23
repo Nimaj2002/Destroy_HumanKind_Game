@@ -55,7 +55,7 @@ class EarthCenter:
         self.screen_rect = ba_game.screen.get_rect()
         self.setting = ba_game.settings
 
-        self.rect = pygame.Rect(self.setting.screen_width / 2 - 45, self.setting.screen_height / 2 - 45, 90, 90)
+        self.rect = pygame.Rect(self.setting.screen_width / 2 - 50, self.setting.screen_height / 2 - 50, 100, 100)
 
     def blitme(self):
         pygame.draw.rect(self.screen, (0, 0, 0), self.rect)
