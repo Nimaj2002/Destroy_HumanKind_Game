@@ -102,13 +102,13 @@ class BeAlien:
 
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
-        if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-            self.AlienShip.clockwise_rotating = True
-        elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
-            self.AlienShip.anti_clockwise_rotating = True
-        elif event.key == pygame.K_q:
+        if event.key == pygame.K_q:
             sys.exit()
-        elif event.key == pygame.K_SPACE:
+        elif event.key == pygame.K_RIGHT or event.key == pygame.K_d and self.stats.game_active:
+            self.AlienShip.clockwise_rotating = True
+        elif event.key == pygame.K_LEFT or event.key == pygame.K_a and self.stats.game_active:
+            self.AlienShip.anti_clockwise_rotating = True
+        elif event.key == pygame.K_SPACE and self.stats.game_active:
             self._fire_bullet()
 
     def _check_keyup_events(self, event):
