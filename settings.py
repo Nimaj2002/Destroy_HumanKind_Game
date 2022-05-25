@@ -35,6 +35,6 @@ class Settings:
         self.Meteor_Speed = 0.1
 
         # colors
-        self.light_Beige_color = (251, 248, 241)
+        self.light_Beige_color = (206, 192, 171)
         self.dark_Beige_color = (233, 218, 193)
         self.blue_color = (84, 186, 185)

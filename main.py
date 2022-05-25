@@ -1,3 +1,4 @@
+import os.path
 import sys
 from time import sleep
 
@@ -22,10 +23,14 @@ class BeAlien:
         pygame.init()
         self.settings = Settings()
 
-        pygame.display.set_caption("Be Alien :D")
+        pygame.display.set_caption("Destroy Human Kind")
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height)
         )
+
+        self.back_ground = pygame.image.load(os.path.join("Assets/images/", "background.png"))
+        self.back_ground = pygame.transform.scale(self.back_ground,
+                                                  (self.settings.screen_width, self.settings.screen_height))
 
         self.Earth = Earth(self)
         self.Earth_center = EarthCenter(self)
@@ -77,7 +82,7 @@ class BeAlien:
 
     def _check_play_btn(self, mouse_pos):
         """Start a new game when the player clicks Play."""
-        button_clicked = self.startpage.play_btn.collidepoint(mouse_pos)
+        button_clicked = self.startpage.play_rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
             # Reset the game settings.
             self.stats.game_active = True
@@ -97,9 +102,9 @@ class BeAlien:
 
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
-        if event.key == pygame.K_RIGHT:
+        if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
             self.AlienShip.clockwise_rotating = True
-        elif event.key == pygame.K_LEFT:
+        elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
             self.AlienShip.anti_clockwise_rotating = True
         elif event.key == pygame.K_q:
             sys.exit()
@@ -108,9 +113,9 @@ class BeAlien:
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
-        if event.key == pygame.K_RIGHT:
+        if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
             self.AlienShip.clockwise_rotating = False
-        elif event.key == pygame.K_LEFT:
+        elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
             self.AlienShip.anti_clockwise_rotating = False
 
     def _fire_bullet(self):
@@ -190,8 +195,7 @@ class BeAlien:
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
-        self.screen.fill(self.settings.light_Beige_color)
-        self.AlienShip.blitme()
+        self.screen.blit(self.back_ground, (0, 0))
 
         # Drawing Bullets
         for bullet in self.bullets.sprites():
@@ -201,7 +205,8 @@ class BeAlien:
         # Draw the score information.
         self.sb.show_score()
 
-        # Drawing meteors Earth & Human
+        # Drawing AlienShip,meteors ,Earth & Human
+        self.AlienShip.blitme()
         self.meteors.draw(self.screen)
         self.Earth.blitme()
         self.Human.blitme()
