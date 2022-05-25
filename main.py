@@ -39,7 +39,6 @@ class BeAlien:
         self.bullets = pygame.sprite.Group()
         self.meteors = pygame.sprite.Group()
 
-        self.total_level = 1
         self.starting_meteor = 10
 
         self.clock = pygame.time.Clock()
@@ -59,7 +58,7 @@ class BeAlien:
             self._check_events()
             self._level_manager()
             if self.stats.game_active:
-                self._Human_movement()
+                self._Earth_Human_movement()
                 self.Human.update()
                 self.Earth.update()
                 self.AlienShip.update()
@@ -145,17 +144,18 @@ class BeAlien:
 
     def _level_manager(self):
         """This function is for rotating Earth in difrent rotations"""
-        if self.total_level == 1:
-            self.Earth.clockwise_rotating = True
-        elif self.total_level == 2:
-            self.Earth.anti_clockwise_rotating = True
+        if (self.stats.score + self.stats.missed) // 10 == 0 and (self.stats.score + self.stats.missed) != 0:
+            self.stats.total_level += 1
 
-    def _Human_movement(self):
+    def _Earth_Human_movement(self):
         """This function is for rotating Earth in difrent rotations"""
-        if self.total_level == 1:
+        if self.stats.total_level == 1:
+            self.Earth.clockwise_rotating = True
             self.Human.clockwise_rotating = True
-        elif self.total_level == 2:
-            self.Human.anti_clockwise_rotating = True
+
+        elif self.stats.total_level == 2:
+            self.Earth.clockwise_rotating = False
+            self.Human.clockwise_rotating = False
 
     def _check_meteor_collission(self):
         """check collision of each meteor with Ship & walls & Earth and creat another meteor if"""

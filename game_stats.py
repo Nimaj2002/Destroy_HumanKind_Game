@@ -14,6 +14,7 @@ class Gamestats:
         """Initialize statistics that can change during the game."""
         self.score = 0
         self.missed = 0
+        self.total_level = 1
         self.get_high_score()
 
     def get_high_score(self):

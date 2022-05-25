@@ -22,15 +22,14 @@ class Human:
         self.x, self.y = float(self.rect.x), float(self.rect.y)
 
         # Rotating Flag
-        self.clockwise_rotating = False
-        self.anti_clockwise_rotating = False
+        self.clockwise_rotating = True
 
     def update(self):
         """Updating rotation of human"""
         if self.clockwise_rotating:
             self.spining_angel_in_degrees += self.settings.human_rotation_speed
 
-        elif self.anti_clockwise_rotating:
+        elif not self.clockwise_rotating:
             self.spining_angel_in_degrees -= self.settings.human_rotation_speed
 
         self.x, self.y = float(self.rect.x), float(self.rect.y)

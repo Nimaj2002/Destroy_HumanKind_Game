@@ -28,14 +28,13 @@ class Earth:
         self.angel_in_degrees = 0
 
         # Rotation Flag
-        self.clockwise_rotating = False
-        self.anti_clockwise_rotating = False
+        self.clockwise_rotating = True
 
     def update(self):
         """Updating rotation of Earth"""
         if self.clockwise_rotating:
             self.angel_in_degrees -= self.settings.earth_rotation_speed
-        elif self.anti_clockwise_rotating:
+        elif not self.clockwise_rotating:
             self.angel_in_degrees += self.settings.earth_rotation_speed
 
     def blitme(self):

@@ -43,15 +43,24 @@ class Scoreboard:
         self.missed_rect.right = self.screen_rect.right - 30
         self.missed_rect.top = 70
 
-        high_score = f"high Score {str(self.stats.high_score)}"
+        level = f"Level {str(self.stats.total_level)}"
+        self.level_image = self.font.render(level, True, self.settings.blue_color)
+        # Display the score at the top left of the score string.
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.left = self.screen_rect.left + 30
+        self.level_rect.top = 30
+
+        high_score = f"High Score {str(self.stats.high_score)}"
         self.high_image = self.font.render(high_score, True, self.settings.blue_color)
         # Display the score at the top left of the score string.
         self.high_rect = self.high_image.get_rect()
         self.high_rect.left = self.screen_rect.left + 30
-        self.high_rect.top = 30
+        self.high_rect.top = 70
 
     def show_score(self):
         """Draw score to the screen."""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.missed_image, self.missed_rect)
+
+        self.screen.blit(self.level_image, self.level_rect)
         self.screen.blit(self.high_image, self.high_rect)
