@@ -43,7 +43,7 @@ class StartScreen:
         self.write_text(f"{self.stats.high_score}", "small", self.settings.blue_color,
                         (self.settings.screen_width // 2 - 20, 260))
 
-        self.write_text("Guid for Noobs", "small", self.settings.blue_color,
+        self.write_text("Guide for Noobs", "small", self.settings.blue_color,
                         (self.settings.screen_width // 2 - 150, 330))
         self.screen.blit(self.keyboard_image, (self.settings.screen_width // 2 - 100, 380))
 
