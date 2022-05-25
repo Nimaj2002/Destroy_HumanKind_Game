@@ -39,8 +39,6 @@ class BeAlien:
         self.bullets = pygame.sprite.Group()
         self.meteors = pygame.sprite.Group()
 
-        self.starting_meteor = 10
-
         self.clock = pygame.time.Clock()
         self.stats = Gamestats(self)
         self.sb = Scoreboard(self)
@@ -91,8 +89,8 @@ class BeAlien:
             self.meteors.empty()
             self.bullets.empty()
 
-            # Create a new fleet and center the ship.
-            for _ in range(5):
+            # Create 8 meteor and center the ship.
+            for _ in range(8):
                 self._create_a_meteor()
             self.AlienShip.reset_alien()
 
@@ -144,16 +142,25 @@ class BeAlien:
 
     def _level_manager(self):
         """This function is for rotating Earth in difrent rotations"""
-        if (self.stats.score + self.stats.missed) // 10 == 0 and (self.stats.score + self.stats.missed) != 0:
-            self.stats.total_level += 1
+        new_score = (self.stats.score + self.stats.missed) // 10 + 1
+        if self.stats.total_level == new_score:
+            pass
+        else:
+            self.stats.total_level = new_score
+            # increase speed of earth and human
+            self.settings.increase_speed()
+            # creat 2 new meteor each level
+            self._create_a_meteor()
+
+        self.sb.prep_score()
 
     def _Earth_Human_movement(self):
         """This function is for rotating Earth in difrent rotations"""
-        if self.stats.total_level == 1:
+        if self.stats.total_level % 2 == 0:
             self.Earth.clockwise_rotating = True
             self.Human.clockwise_rotating = True
 
-        elif self.stats.total_level == 2:
+        elif self.stats.total_level % 2 == 1:
             self.Earth.clockwise_rotating = False
             self.Human.clockwise_rotating = False
 
@@ -177,8 +184,10 @@ class BeAlien:
 
     def _ship_hit(self):
         """Respond to the ship being hit by a meteor and showing start screen"""
+        # RESET GAME SETTINGS
         self.stats.save_high_score()
         self.stats.reset_stats()
+        self.settings.initialize_dynamic_settings()
         sleep(1)
         self.stats.game_active = False
         pygame.mouse.set_visible(True)
