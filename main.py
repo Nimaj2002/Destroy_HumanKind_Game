@@ -188,7 +188,7 @@ class BeAlien:
         self.stats.save_high_score()
         self.stats.reset_stats()
         self.settings.initialize_dynamic_settings()
-        sleep(1)
+        sleep(2)
         self.stats.game_active = False
         pygame.mouse.set_visible(True)
 
